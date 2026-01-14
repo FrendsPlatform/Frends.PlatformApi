@@ -5,14 +5,14 @@ on:
     branches:    
       - main
     paths:
-      - 'Frends.ManagementApi.Request/**'
+      - 'Frends.PlatformApi.Request/**'
   workflow_dispatch:
 
 jobs:
   build:
     uses: FrendsPlatform/FrendsTasks/.github/workflows/linux_build_main.yml@main
     with:
-      workdir: Frends.ManagementApi.Request
+      workdir: Frends.PlatformApi.Request
     secrets:
       badge_service_api_key: ${{ secrets.BADGE_SERVICE_API_KEY }}
       

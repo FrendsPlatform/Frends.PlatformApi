@@ -1,10 +1,10 @@
-# Frends.ManagementApi
+# Frends.PlatformApi
 
-Frends Task for Frends Management API related operations.
+Frends Task for Frends Platform API related operations.
 
 # Tasks
 
-- [Frends.ManagementApi.Request](Frends.ManagementApi.Request/README.md)
+- [Frends.PlatformApi.Request](Frends.PlatformApi.Request/README.md)
 
 # Contributing
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.

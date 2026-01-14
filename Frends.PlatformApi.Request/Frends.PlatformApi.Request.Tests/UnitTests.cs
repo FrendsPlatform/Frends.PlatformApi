@@ -1,6 +1,6 @@
-namespace Frends.ManagementApi.Request.Tests;
+namespace Frends.PlatformApi.Request.Tests;
 
-using Frends.ManagementApi.Request.Definitions;
+using Frends.PlatformApi.Request.Definitions;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
@@ -18,7 +18,7 @@ internal class UnitTests
     private readonly string managementAPIClientSecret = Environment.GetEnvironmentVariable("managementAPIClientSecret");
     private readonly string managementAPIApplicationURI = Environment.GetEnvironmentVariable("ManagementAPIApplicationURI");
     private readonly string testTenant = Environment.GetEnvironmentVariable("TestTenant");
-    private readonly string downloadPath = @$"C:\temp\ManagementApiTest\{DateTime.Now}\";
+    private readonly string downloadPath = @$"C:\temp\PlatformApiTest\{DateTime.Now}\";
     private Input input = new();
     private Options options = new();
     private readonly string _apiKeyName = $"TaskTestApiKeyName_{Guid.NewGuid()}";
@@ -57,8 +57,8 @@ internal class UnitTests
     [TearDown]
     public async Task OneTimeTearDown()
     {
-        if (Directory.Exists(@$"C:\temp\ManagementApiTest"))
-            Directory.Delete(@$"C:\temp\ManagementApiTest", true);
+        if (Directory.Exists(@$"C:\temp\PlatformApiTest"))
+            Directory.Delete(@$"C:\temp\PlatformApiTest", true);
 
         if (_apikeyId > 0) await DeleteApiKey();
         if (_rulesetId > 0) await DeleteRuleset();
@@ -69,7 +69,7 @@ internal class UnitTests
     public async Task Test_Get_apikeys()
     {
         this.input.Url = testTenant + "api/v1/api-management/access/api-keys/1";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -79,7 +79,7 @@ internal class UnitTests
     public async Task Test_Get_apirulesets()
     {
         this.input.Url = testTenant + "api/v1/api-management/access/api-rulesets/1";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -89,7 +89,7 @@ internal class UnitTests
     public async Task Test_Get_apikeys_name()
     {
         this.input.Url = testTenant + "api/v1/api-management/access/api-keys/name/test";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -99,7 +99,7 @@ internal class UnitTests
     public async Task Test_Get_apirulesets_name()
     {
         this.input.Url = testTenant + "api/v1/api-management/access/api-rulesets/name/FrendsAcademy";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -109,7 +109,7 @@ internal class UnitTests
     public async Task Test_Get_api_rulesets()
     {
         this.input.Url = testTenant + "api/v1/api-management/access/api-rulesets?pagingQuery.pageNumber=1&pagingQuery.pageSize=1";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -119,7 +119,7 @@ internal class UnitTests
     public async Task Test_Get_api_apikeys()
     {
         this.input.Url = testTenant + "api/v1/api-management/access/api-keys?environmentId=51&pagingQuery.pageNumber=1&pagingQuery.pageSize=1";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -129,7 +129,7 @@ internal class UnitTests
     public async Task Test_Get_api_specifications()
     {
         this.input.Url = testTenant + "api/v1/api-management/api-specifications/3";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -139,7 +139,7 @@ internal class UnitTests
     public async Task Test_Get_api_specifications_2()
     {
         this.input.Url = testTenant + "api/v1/api-management/api-specifications/3/1";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -149,7 +149,7 @@ internal class UnitTests
     public async Task Test_Get_api_specifications_3()
     {
         this.input.Url = testTenant + "api/v1/api-management/api-specifications?pagingQuery.pageNumber=1&pagingQuery.pageSize=1";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -159,7 +159,7 @@ internal class UnitTests
     public async Task Test_Get_environments()
     {
         this.input.Url = testTenant + "api/v1/environments";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -169,7 +169,7 @@ internal class UnitTests
     public async Task Test_Get_agent_groups()
     {
         this.input.Url = testTenant + "api/v1/agent-groups/51";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -179,7 +179,7 @@ internal class UnitTests
     public async Task Test_Get_environments_2()
     {
         this.input.Url = testTenant + "api/v1/environments/51";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -189,7 +189,7 @@ internal class UnitTests
     public async Task Test_Get_environments_agent_groups2()
     {
         this.input.Url = testTenant + "api/v1/environments/51/agent-groups";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -199,7 +199,7 @@ internal class UnitTests
     public async Task Test_Get_environment_variables()
     {
         this.input.Url = testTenant + "api/v1/environment-variables/1";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -209,7 +209,7 @@ internal class UnitTests
     public async Task Test_Get_environment_variables_2()
     {
         this.input.Url = testTenant + "api/v1/environment-variables?environmentVariableName=ManagementAPI&pagingQuery.pageNumber=1&pagingQuery.pageSize=1";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -219,7 +219,7 @@ internal class UnitTests
     public async Task Test_Get_processes()
     {
         this.input.Url = testTenant + "api/v1/processes/1";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -231,7 +231,7 @@ internal class UnitTests
         var path = downloadPath + @$"Test_Get_processes_export_{DateTime.Now}";
         this.input.DownloadPath = path;
         this.input.Url = testTenant + "api/v1/processes/1/export";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data.Contains("downloaded"));
@@ -242,7 +242,7 @@ internal class UnitTests
     public async Task Test_Get_processes_2()
     {
         this.input.Url = testTenant + "api/v1/processes/6933c9e1-95f4-4494-a630-d3d6b36f7006/versions/2";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -254,7 +254,7 @@ internal class UnitTests
         var path = downloadPath + @$"Test_Get_processes_export_{DateTime.Now}";
         this.input.DownloadPath = path;
         this.input.Url = testTenant + "api/v1/processes/batch-export?ids=1";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data.Contains("downloaded"));
@@ -276,7 +276,7 @@ internal class UnitTests
   ""environmentId"": 51
 }}";
 
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -300,7 +300,7 @@ internal class UnitTests
   ]
 }}";
 
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -315,7 +315,7 @@ internal class UnitTests
         this.input.IsMultipart = true;
         this.input.FilePaths = new[] { new SendFileParameters() { FileParameterKey = FileParameterKey.File, Fullpath = _apiSpecFile } };
 
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -340,7 +340,7 @@ internal class UnitTests
     }}
   ]
 }}";
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -361,7 +361,7 @@ internal class UnitTests
   ""requestLimitPeriod"": ""Minute""
 }}";
 
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(ret.Success);
         ClassicAssert.IsNull(ret.ErrorMessage);
         ClassicAssert.NotNull(ret.Data);
@@ -373,7 +373,7 @@ internal class UnitTests
         var rulesetId = await CreateRuleSet();
         this.input.Method = Methods.Delete;
         this.input.Url = $@"{testTenant}api/v1/api-management/access/api-rulesets/{rulesetId}";
-        var result = await ManagementApi.Request(this.input, this.options, default);
+        var result = await PlatformApi.Request(this.input, this.options, default);
         ClassicAssert.IsTrue(result.Success);
         ClassicAssert.IsNull(result.ErrorMessage);
     }
@@ -392,7 +392,7 @@ internal class UnitTests
   ""environmentId"": 51
 }}";
 
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
 
         return JsonConvert.DeserializeObject<dynamic>(ret.Data.ToString()).data.id;
     }
@@ -412,7 +412,7 @@ internal class UnitTests
   ]
 }}";
 
-        var ret = await ManagementApi.Request(this.input, this.options, default);
+        var ret = await PlatformApi.Request(this.input, this.options, default);
         return JsonConvert.DeserializeObject<dynamic>(ret.Data.ToString()).data.id;
     }
 
@@ -421,14 +421,14 @@ internal class UnitTests
         this.input.Method = Methods.Delete;
         this.input.Url = $@"{testTenant}api/v1/api-management/access/api-keys/{_apikeyId}";
         this.input.Message = null;
-        await ManagementApi.Request(this.input, this.options, default);
+        await PlatformApi.Request(this.input, this.options, default);
     }
 
     public async Task DeleteRuleset()
     {
         this.input.Method = Methods.Delete;
         this.input.Url = $@"{testTenant}api/v1/api-management/access/api-rulesets/{_rulesetId}";
-        await ManagementApi.Request(this.input, this.options, default);
+        await PlatformApi.Request(this.input, this.options, default);
     }
 
     public async Task DeleteApiSpec()
@@ -437,6 +437,6 @@ internal class UnitTests
         this.input.Url = $@"{testTenant}api/v1/api-management/api-specifications/{_apiSpecId}/agent-group/51";
         this.input.IsMultipart = false;
         this.input.FilePaths = null;
-        await ManagementApi.Request(this.input, this.options, default);
+        await PlatformApi.Request(this.input, this.options, default);
     }
 }

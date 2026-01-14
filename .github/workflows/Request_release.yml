@@ -7,7 +7,7 @@ jobs:
   build:
     uses: FrendsPlatform/FrendsTasks/.github/workflows/release.yml@main
     with:
-      workdir: Frends.ManagementApi.Request
+      workdir: Frends.PlatformApi.Request
     secrets:
       feed_api_key: ${{ secrets.TASKS_FEED_API_KEY }}
       
