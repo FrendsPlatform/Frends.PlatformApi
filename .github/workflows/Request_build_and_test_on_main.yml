@@ -2,7 +2,7 @@ name: Request_build_main
 
 on:
   push:
-    branches:    
+    branches:
       - main
     paths:
       - 'Frends.PlatformApi.Request/**'
@@ -13,6 +13,11 @@ jobs:
     uses: FrendsPlatform/FrendsTasks/.github/workflows/linux_build_main.yml@main
     with:
       workdir: Frends.PlatformApi.Request
+      env_var_name_1: APPLICATION_ID
+      env_var_name_2: CLIENT_SECRET
+      env_var_name_3: TENANT_URL
     secrets:
-      badge_service_api_key: ${{ secrets.BADGE_SERVICE_API_KEY }}
-      
+      badge_service_api_key: ${{ secrets.platformApiApplicationId }}
+      env_var_value_1: ${{ secrets.APPLICATION_ID }}
+      env_var_value_2: ${{ secrets.CLIENT_SECRET }}
+      env_var_value_3: ${{ secrets.TENANT_URL }}

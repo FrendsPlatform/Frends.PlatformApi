@@ -4,7 +4,7 @@ info:
   description: ''
   version: 0.0.1
 servers:
-  - url: /api/tasktesting/v1
+  - url: /api/testSpec/v1
 paths:
   /customers:
     get:

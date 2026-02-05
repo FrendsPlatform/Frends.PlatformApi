@@ -2,7 +2,7 @@
 #pragma warning disable SA1503 // Braces should not be omitted
 namespace Frends.PlatformApi.Request;
 
-using Frends.PlatformApi.Request.Definitions;
+using Definitions;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using RestSharp.Authenticators.OAuth2;
