@@ -14,17 +14,14 @@ internal class UnitTests
     private static readonly string ApplicationId = Environment.GetEnvironmentVariable("APPLICATION_ID");
     private static readonly string ClientSecret = Environment.GetEnvironmentVariable("CLIENT_SECRET");
     private readonly string tenantUrl = Environment.GetEnvironmentVariable("TENANT_URL");
+
     private readonly string applicationUri = $"api://{ApplicationId}";
-    private readonly string downloadPath = @$"C:\temp\PlatformApiTest\{Guid.NewGuid().ToString("N")[..4]}\";
+    private static readonly string TestDir = Path.Join(Directory.GetCurrentDirectory(), "TestData");
+    private static readonly string DownloadPath = Path.Join(TestDir, "downloads");
     private Input input;
     private Options options;
 
-    private readonly string apiSpecFile =
-        Path.Combine(
-            Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName ??
-            throw new Exception("Invalid path to test file"),
-            "TaskTest.yaml"
-        );
+    private readonly string apiSpecFile = Path.Join(TestDir, "TaskTest.yaml");
 
     [SetUp]
     public void SetUp()
@@ -62,7 +59,7 @@ internal class UnitTests
     [Test]
     public async Task Get_With_DownloadPath_Works_Correctly()
     {
-        var path = downloadPath + @$"Test_Get_processes_export_{Guid.NewGuid().ToString("N")[..4]}";
+        var path = Path.Join(DownloadPath + $"Test_Get_processes_export_{Guid.NewGuid().ToString("N")[..4]}");
         input.DownloadPath = path;
         input.Url = tenantUrl + "api/v1/processes/1126/export";
         var ret = await PlatformApi.Request(input, options, CancellationToken.None);
@@ -75,7 +72,7 @@ internal class UnitTests
     [Test]
     public async Task Get_With_DownloadPath_Fails_When_No_Data_Found()
     {
-        var path = downloadPath + $"Test_Get_processes_export_{Guid.NewGuid().ToString("N")[..4]}";
+        var path = Path.Join(DownloadPath + $"Test_Get_processes_export_{Guid.NewGuid().ToString("N")[..4]}");
         input.DownloadPath = path;
         input.Url = tenantUrl + $"api/v1/processes/{Guid.NewGuid()}/export";
         var ret = await PlatformApi.Request(input, options, CancellationToken.None);
