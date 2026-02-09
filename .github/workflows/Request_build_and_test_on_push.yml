@@ -2,17 +2,23 @@ name: Request_build_test
 
 on:
   push:
-    branches-ignore:    
+    branches-ignore:
       - main
     paths:
-      - 'Frends.ManagementApi.Request/**'
+      - 'Frends.PlatformApi.Request/**'
   workflow_dispatch:
 
 jobs:
   build:
     uses: FrendsPlatform/FrendsTasks/.github/workflows/linux_build_test.yml@main
     with:
-      workdir: Frends.ManagementApi.Request
+      workdir: Frends.PlatformApi.Request
+      env_var_name_1: APPLICATION_ID
+      env_var_name_2: CLIENT_SECRET
+      env_var_name_3: TENANT_URL
     secrets:
       badge_service_api_key: ${{ secrets.BADGE_SERVICE_API_KEY }}
       test_feed_api_key: ${{ secrets.TASKS_TEST_FEED_API_KEY }}
+      env_var_value_1: ${{ secrets.APPLICATION_ID }}
+      env_var_value_2: ${{ secrets.CLIENT_SECRET }}
+      env_var_value_3: ${{ secrets.TENANT_URL }}

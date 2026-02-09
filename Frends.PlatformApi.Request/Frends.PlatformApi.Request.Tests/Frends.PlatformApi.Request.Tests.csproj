@@ -4,6 +4,8 @@
     <TargetFramework>net6.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <RootNamespace>Frends.PlatformApi.Request.Tests</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -25,7 +27,11 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Frends.ManagementApi.Request\Frends.ManagementApi.Request.csproj" />
+    <ProjectReference Include="..\Frends.PlatformApi.Request\Frends.PlatformApi.Request.csproj" />
   </ItemGroup>
+    
+    <ItemGroup>
+        <None Include="TestData\**\*" CopyToOutputDirectory="Always"/>
+    </ItemGroup>
 
 </Project>

@@ -1,8 +1,8 @@
 ﻿#pragma warning disable SA1000 // Keywords should be spaced correctly. new() vs new ().
 #pragma warning disable SA1503 // Braces should not be omitted
-namespace Frends.ManagementApi.Request;
+namespace Frends.PlatformApi.Request;
 
-using Frends.ManagementApi.Request.Definitions;
+using Definitions;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using RestSharp.Authenticators.OAuth2;
@@ -13,13 +13,13 @@ using System.Threading;
 using System.Threading.Tasks;
 
 /// <summary>
-/// Frends Management API Task.
+/// Frends Platform API Task.
 /// </summary>
-public static class ManagementApi
+public static class PlatformApi
 {
     /// <summary>
-    /// Task for Frends Management API related operations.
-    /// [Documentation](https://tasks.frends.com/tasks/frends-tasks/Frends.ManagementApi.Request).
+    /// Task for Frends Platform API related operations.
+    /// [Documentation](https://tasks.frends.com/tasks/frends-tasks/Frends.PlatformApi.Request).
     /// </summary>
     /// <param name="input">Input parameters.</param>
     /// <param name="options">Option parameters.</param>

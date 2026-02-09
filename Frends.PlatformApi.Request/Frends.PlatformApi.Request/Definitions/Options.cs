@@ -1,4 +1,4 @@
-﻿namespace Frends.ManagementApi.Request.Definitions;
+﻿namespace Frends.PlatformApi.Request.Definitions;
 
 using System.ComponentModel;
 
