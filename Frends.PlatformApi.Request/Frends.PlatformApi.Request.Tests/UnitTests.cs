@@ -52,8 +52,8 @@ internal class UnitTests
     [TearDown]
     public void OneTimeTearDown()
     {
-        if (Directory.Exists(@$"C:\temp"))
-            Directory.Delete(@$"C:\temp", true);
+        if (Directory.Exists(DownloadPath))
+            Directory.Delete(DownloadPath, true);
     }
 
     [Test]

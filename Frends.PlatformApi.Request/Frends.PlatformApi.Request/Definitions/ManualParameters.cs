@@ -1,4 +1,5 @@
 ﻿namespace Frends.PlatformApi.Request.Definitions;
+
 using System.ComponentModel;
 
 /// <summary>
