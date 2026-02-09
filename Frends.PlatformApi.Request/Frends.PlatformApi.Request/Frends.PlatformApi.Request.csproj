@@ -11,7 +11,7 @@
 		<PackageTags>Frends</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<Description>Task for Frends Management API related operations.</Description>
+		<Description>Task for Frends Platform API related operations.</Description>
 		<PackageProjectUrl>https://frends.com/</PackageProjectUrl>
 		<RepositoryUrl>
 			https://github.com/FrendsPlatform/Frends.PlatformApi/tree/main/Frends.PlatformApi.Request</RepositoryUrl>
