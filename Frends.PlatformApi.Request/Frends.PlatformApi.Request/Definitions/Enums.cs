@@ -1,4 +1,4 @@
-﻿namespace Frends.PlatformApi.Request.Definitions;
+namespace Frends.PlatformApi.Request.Definitions;
 
 /// <summary>
 /// Type of HTTP Request.

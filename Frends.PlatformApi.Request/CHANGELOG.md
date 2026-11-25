@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.0] - 2026-11-25
+### Changed
+- **[Breaking Change]** Renamed `ThrowExceptionOnError` option to `ThrowErrorOnFailure`.
+- **[Breaking Change]** Replaced `ErrorMessage` in the result with `Error` object containing `Message` and `AdditionalInfo`.
+- Added `ErrorMessageOnFailure` option for overriding the error message on failure.
+- Updated target framework from net6.0 to net8.0.
+
 ## [1.2.0] - 2026-01-14
 ### Changed
 - Rename task to PlatformApi

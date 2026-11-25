@@ -1,10 +1,10 @@
-using System.Threading;
-using NUnit.Framework;
 using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Frends.PlatformApi.Request.Definitions;
 using Newtonsoft.Json;
+using NUnit.Framework;
 
 namespace Frends.PlatformApi.Request.Tests;
 
@@ -13,15 +13,13 @@ internal class UnitTests
 {
     private static readonly string ApplicationId = Environment.GetEnvironmentVariable("APPLICATION_ID");
     private static readonly string ClientSecret = Environment.GetEnvironmentVariable("CLIENT_SECRET");
-    private readonly string tenantUrl = Environment.GetEnvironmentVariable("TENANT_URL");
-
-    private readonly string applicationUri = $"api://{ApplicationId}";
     private static readonly string TestDir = Path.Join(Directory.GetCurrentDirectory(), "TestData");
     private static readonly string DownloadPath = Path.Join(TestDir, "downloads");
+    private readonly string tenantUrl = Environment.GetEnvironmentVariable("TENANT_URL");
+    private readonly string applicationUri = $"api://{ApplicationId}";
+    private readonly string apiSpecFile = Path.Join(TestDir, "TaskTest.yaml");
     private Input input;
     private Options options;
-
-    private readonly string apiSpecFile = Path.Join(TestDir, "TaskTest.yaml");
 
     [SetUp]
     public void SetUp()
@@ -39,12 +37,12 @@ internal class UnitTests
             ApplicationId = ApplicationId,
             ApplicationUri = applicationUri,
             ClientSecret = ClientSecret,
-            GeneratedToken = true
+            GeneratedToken = true,
         };
 
         options = new Options
         {
-            ThrowExceptionOnError = true,
+            ThrowErrorOnFailure = true,
             Timeout = 10,
         };
     }
@@ -64,7 +62,7 @@ internal class UnitTests
         input.Url = tenantUrl + "api/v1/processes/1126/export";
         var ret = await PlatformApi.Request(input, options, CancellationToken.None);
         Assert.That(ret.Success);
-        Assert.That(ret.ErrorMessage, Is.Null);
+        Assert.That(ret.Error, Is.Null);
         Assert.That(ret.Data.Contains("downloaded"));
         Assert.That(File.Exists(path + ".json_"));
     }
@@ -77,7 +75,7 @@ internal class UnitTests
         input.Url = tenantUrl + $"api/v1/processes/{Guid.NewGuid()}/export";
         var ret = await PlatformApi.Request(input, options, CancellationToken.None);
         Assert.That(ret.Success, Is.False);
-        Assert.That(ret.ErrorMessage, Does.Contain("There is no data to write to the file."));
+        Assert.That(ret.Error.Message, Does.Contain("There is no data to write to the file."));
     }
 
     [Test]
@@ -98,7 +96,7 @@ internal class UnitTests
         var ret = await PlatformApi.Request(input, options, CancellationToken.None);
 
         Assert.That(ret.Success);
-        Assert.That(ret.ErrorMessage, Is.Null);
+        Assert.That(ret.Error, Is.Null);
         Assert.That(ret.Data, Is.Not.Null);
 
         int apiSpecId = JsonConvert.DeserializeObject<dynamic>(ret.Data.Content.ToString()).data.id;
@@ -111,7 +109,7 @@ internal class UnitTests
         input.Url = tenantUrl + "/api/v1/api-management/api-specifications";
         var ret = await PlatformApi.Request(input, options, CancellationToken.None);
         Assert.That(ret.Success);
-        Assert.That(ret.ErrorMessage, Is.Null);
+        Assert.That(ret.Error, Is.Null);
         Assert.That(ret.Data, Is.Not.Null);
     }
 
@@ -131,7 +129,7 @@ internal class UnitTests
         };
         var ret = await PlatformApi.Request(input, options, CancellationToken.None);
         Assert.That(ret.Success);
-        Assert.That(ret.ErrorMessage, Is.Null);
+        Assert.That(ret.Error, Is.Null);
         Assert.That(ret.Data, Does.Contain("\"data\":[],"));
     }
 
